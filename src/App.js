@@ -8,7 +8,7 @@ function App() {
   const [email, setEmail] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
   const [dob, setDOB] = useState('')
-  // const [image, setImage] = useState('')
+  const [image, setImage] = useState('')
   const [hash, setHash] = useState('')
   const [gender, setGender] = useState('')
   const [stateOfOrigin, setStateOfOrigin] = useState('')
@@ -23,20 +23,19 @@ function App() {
       data.append('email', email);
       data.append('date_of_birth', dob);
       data.append('state', stateOfOrigin);
-      // data.append('profile_image', image);
+      data.append('profile_image', image);
       data.append('gender', gender);
       data.append('hash', hash);
       console.log('data', data);
-     await axios.post('https://www.ppfnhealthcare.com/api/beneficiary',data,{
-      // method: 'POST',
-      // body: data,
-      // mode: 'no-cors',
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(response => console.log(response)).catch(error => console.error(error));
-    
-  },[dob, email, firstname, gender, hash, lastname, phoneNumber, stateOfOrigin])
+    axios
+				.post('https://ppfnhealthapp.com/api/beneficiary', data)
+				.then(function (response) {
+					console.log(response);
+				})
+				.catch(function (error) {
+					console.log(JSON.stringify(error));
+				});
+  },[dob, email, firstname, gender, hash, image, lastname, phoneNumber, stateOfOrigin])
 
   return (
   <div>
@@ -55,7 +54,7 @@ function App() {
       <input type="number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.currentTarget.value)} min={14} max={14} minLength={14} maxLength={14  } placeholder="Phone  Number" name="phone_number" />
       <input type="date" value={dob} onChange={(e) => setDOB(e.currentTarget.value)} placeholder="Date of birth" name="dob" />
       <input type="select" value={stateOfOrigin} onChange={(e) => setStateOfOrigin(e.currentTarget.value)} placeholder="State of Origin" name="state" />
-      {/* <input type="file" onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))} placeholder="Select Image" name="image" /> */}
+      <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} placeholder="Select Image" name="image" />
       <button type="button" name="submit" onClick={handleSumbit}>Submit</button>
     </form>
   </div> 
