@@ -27,7 +27,9 @@ function App() {
       data.append('gender', gender);
       data.append('hash', hash);
       console.log('data', data);
-     axios.post('https://www.ppfnhealthcare.com/api/beneficiary',data,{
+     fetch('https://www.ppfnhealthcare.com/api/beneficiary',{
+      method: 'POST',
+      mode: 'no-cors',
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -52,7 +54,7 @@ function App() {
       <input type="number" value={phoneNumber} onChange={(e) => setPhoneNumber(e.currentTarget.value)} min={14} max={14} minLength={14} maxLength={14  } placeholder="Phone  Number" name="phone_number" />
       <input type="date" value={dob} onChange={(e) => setDOB(e.currentTarget.value)} placeholder="Date of birth" name="dob" />
       <input type="select" value={stateOfOrigin} onChange={(e) => setStateOfOrigin(e.currentTarget.value)} placeholder="State of Origin" name="state" />
-      <input type="file" value={image} onChange={(e) => setImage(e.currentTarget.value)} placeholder="Select Image" name="image" />
+      <input type="file" onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))} placeholder="Select Image" name="image" />
       <button type="button" name="submit" onClick={handleSumbit}>Submit</button>
     </form>
   </div> 
