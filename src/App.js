@@ -27,7 +27,7 @@ function App() {
       data.append('gender', gender);
       data.append('hash', hash);
       console.log('data', data);
-     axios('https://www.ppfnhealthcare.com/api/beneficiary',data,{
+     axios.post('https://www.ppfnhealthcare.com/api/beneficiary',data,{
       // method: 'POST',
       // body: data,
       // mode: 'no-cors',
